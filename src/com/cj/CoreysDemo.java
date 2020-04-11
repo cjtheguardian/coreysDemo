@@ -2,6 +2,6 @@ package com.cj;
 
 public class CoreysDemo {
     public static void main(String[] args) {
-        System.out.println("Hello world");
+        System.out.println("Hello Corey");
     }
 }
