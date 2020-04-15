@@ -4,3 +4,4 @@ target/
 *.jar
 *.log
 *.iml
+out/
