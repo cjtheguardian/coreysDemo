@@ -7,7 +7,7 @@ import com.cj.converter.unit.TimeUnit;
 import java.util.Arrays;
 import java.util.List;
 
-public final class AccelerationUnit extends ComplexUnit<AccelerationUnit> {
+public final class AccelerationUnit extends ComplexUnit {
 
 
     public static final AccelerationUnit METERS_PER_SECOND_SQUARED = new AccelerationUnit("m/s2", DistanceUnit.METERS, TimeUnit.SECONDS);

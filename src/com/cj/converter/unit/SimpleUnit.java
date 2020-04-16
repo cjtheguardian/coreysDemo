@@ -1,31 +1,28 @@
 package com.cj.converter.unit;
 
-public abstract class SimpleUnit<T extends SimpleUnit<T>> extends Unit<T> {
+import com.cj.converter.unit.dimension.SimpleDimension;
+import com.cj.converter.unit.transformer.SimpleTransformer;
 
-    public SimpleUnit(String symbol) {
-        super(symbol);
+public abstract class SimpleUnit extends Unit {
+
+    private SimpleTransformer transformer;
+
+    public SimpleUnit(String symbol, SimpleDimension dimension, SimpleTransformer transformer) {
+        super(symbol, dimension);
+        this.transformer = transformer;
     }
 
-    public final Double to(T type, Double input) {
-        // due to type erasures (generics), we should validate that the from and to types are compatible
-        if(!this.getClass().equals(type.getClass())) {
-            throw new IllegalArgumentException("Cannot convert units of incompatible types "+this.getClass().getSimpleName() + " and " + type.getClass().getSimpleName());
-        }
-        Double inputAsBaseType = toBaseType(input);
-        Double inputAsWantedType = type.fromBaseType(inputAsBaseType);
-        return inputAsWantedType;
+
+    protected Double convert(Unit toUnit, Double input) {
+        // from the validation method in Unit class, we know the toUnit is a SimpleUnit
+        SimpleUnit unitToConvertTo = (SimpleUnit) toUnit;
+        Double thisAsBaseType = transformer.toBaseUnitType(input);
+        return unitToConvertTo.transformer.fromBaseUnitType(thisAsBaseType);
     }
 
-    protected Double toBaseType(Double input) {
-        Double conversionRate = getConversionRateToBaseType();
-        return input * conversionRate;
+    @Override
+    public SimpleDimension getDimension() {
+        return (SimpleDimension) super.getDimension();
     }
-
-    protected Double fromBaseType(Double input) {
-        Double conversionRate = getConversionRateToBaseType();
-        return input / conversionRate;
-    }
-
-    protected abstract Double getConversionRateToBaseType();
 
 }
