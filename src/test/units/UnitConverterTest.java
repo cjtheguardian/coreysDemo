@@ -70,7 +70,7 @@ public class UnitConverterTest {
 
     private static void testExceptionWithSimpleThenComplexUnit() {
         System.out.println();
-        System.out.println("Testing complex to simple unit conversion....");
+        System.out.println("Testing simple to complex unit conversion....");
         try{
             Double acc = UnitConverter.convert(10.0,"m","m/s");
             System.out.println("NOT GOOD!!! - calculate 10 meters as " + acc + " m/s.... uh oh");

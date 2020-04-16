@@ -1,12 +1,13 @@
 package com.cj.converter.unit;
 
-public final class TimeUnit extends SimpleUnit<TimeUnit> {
+import com.cj.converter.unit.dimension.Dimension;
+import com.cj.converter.unit.dimension.Time;
+import com.cj.converter.unit.transformer.FactoredTransformer;
 
-    private Double conversionRateToSeconds;
+public final class TimeUnit extends SimpleUnit {
 
     public TimeUnit(String symbol, Double conversionRateToSeconds) {
-        super(symbol);
-        this.conversionRateToSeconds = conversionRateToSeconds;
+        super(symbol, Dimension.TIME, new FactoredTransformer(conversionRateToSeconds));
     }
 
 
@@ -15,8 +16,4 @@ public final class TimeUnit extends SimpleUnit<TimeUnit> {
     public static TimeUnit MINUTES = new TimeUnit("min",60.0);
     public static TimeUnit HOURS = new TimeUnit("h", 3600.0);
 
-    @Override
-    public final Double getConversionRateToBaseType() {
-        return conversionRateToSeconds;
-    }
 }

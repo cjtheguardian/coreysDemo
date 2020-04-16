@@ -2,18 +2,22 @@ package com.cj.converter.unit.complex;
 
 import com.cj.converter.unit.SimpleUnit;
 import com.cj.converter.unit.Unit;
+import com.cj.converter.unit.dimension.Dimension;
+import com.cj.converter.unit.dimension.SimpleDimension;
+import com.cj.converter.unit.dimension.complex.ComplexDimension;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class ComplexUnit<T extends ComplexUnit<T>> extends Unit<T> {
+public class ComplexUnit extends Unit {
 
     protected List<SimpleUnit> top;
     protected List<SimpleUnit> bottom;
 
     public ComplexUnit(String symbol, List<SimpleUnit> top, List<SimpleUnit> bottom) {
-        super(symbol);
+        super(symbol, toDimension(top, bottom));
         if(top == null) {
             top = new ArrayList<>();
         }
@@ -24,18 +28,26 @@ public class ComplexUnit<T extends ComplexUnit<T>> extends Unit<T> {
         this.bottom = bottom;
     }
 
-    public ComplexUnit(List<SimpleUnit> top, List<SimpleUnit> bottom) {
-        this(null, top, bottom);
+    private static Dimension toDimension(List<SimpleUnit> top, List<SimpleUnit> bottom) {
+        // these are called lambdas, if you havent gotten to them yet and are confused here. i can expand this code out to be more readable
+        List<SimpleDimension> topDimensions = top.stream().map(SimpleUnit::getDimension).collect(Collectors.toList());
+        List<SimpleDimension> bottomDimensions = bottom.stream().map(SimpleUnit::getDimension).collect(Collectors.toList());
+        return new ComplexDimension(topDimensions, bottomDimensions);
+
     }
 
     @Override
-    public final Double to(T type, Double input) {
+    public final Double convert(Unit type, Double input) {
+        if(!(type instanceof ComplexUnit)) {
+            throw new IllegalArgumentException("Cannot convert from a ComplexUnit to a non ComplexUnit");
+        }
+        ComplexUnit convertToUnit = (ComplexUnit) type;
         List<SimpleUnit> thisUnitTop = copyList(top);
-        List<SimpleUnit> toTypeTop = copyList(type.top);
+        List<SimpleUnit> toTypeTop = copyList(convertToUnit.top);
         Double convertedTopPart = convert(thisUnitTop, toTypeTop, input);
 
         List<SimpleUnit> thisUnitBottom = copyList(bottom);
-        List<SimpleUnit> toTypeBottom = copyList(type.bottom);
+        List<SimpleUnit> toTypeBottom = copyList(convertToUnit.bottom);
         Double convertedBottomPart = convert(thisUnitBottom, toTypeBottom, 1.0);
         return convertedTopPart / convertedBottomPart;
     }
