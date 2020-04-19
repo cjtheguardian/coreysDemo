@@ -29,11 +29,18 @@ public class ComplexUnit extends Unit {
     }
 
     private static Dimension toDimension(List<SimpleUnit> top, List<SimpleUnit> bottom) {
-        // these are called lambdas, if you havent gotten to them yet and are confused here. i can expand this code out to be more readable
-        List<SimpleDimension> topDimensions = top.stream().map(SimpleUnit::getDimension).collect(Collectors.toList());
-        List<SimpleDimension> bottomDimensions = bottom.stream().map(SimpleUnit::getDimension).collect(Collectors.toList());
+        List<SimpleDimension> topDimensions = toDimensions(top);
+        List<SimpleDimension> bottomDimensions = toDimensions(bottom);
         return new ComplexDimension(topDimensions, bottomDimensions);
 
+    }
+
+    private static List<SimpleDimension> toDimensions(List<SimpleUnit> units) {
+        List<SimpleDimension> dimensions = new ArrayList<>();
+        for(SimpleUnit unit : units) {
+            dimensions.add(unit.getDimension());
+        }
+        return dimensions;
     }
 
     @Override
