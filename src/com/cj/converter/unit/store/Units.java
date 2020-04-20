@@ -13,9 +13,8 @@ public class Units {
 
     private static Map<String, Unit> unitsBySymbol = new HashMap<>();
 
-    static {
-        // TODO gotta be a better way to do this
-        // need to initialize all the unit classes so they populated in this Map
+    public static void initializeUnitsRepo() {
+
         new VelocityUnit(null, DistanceUnit.METERS, TimeUnit.HOURS);
         new AccelerationUnit(null, DistanceUnit.METERS, TimeUnit.HOURS);
 
@@ -29,6 +28,7 @@ public class Units {
     }
 
     public static Unit getUnitForSymbol(String symbol) {
+
         return unitsBySymbol.get(symbol);
     }
 
