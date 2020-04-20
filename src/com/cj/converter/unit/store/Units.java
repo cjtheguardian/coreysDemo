@@ -19,6 +19,7 @@ public class Units {
         // need to initialize all the unit classes so they populated in this Map
         new VelocityUnit(null, DistanceUnit.METERS, TimeUnit.HOURS);
         new AccelerationUnit(null, DistanceUnit.METERS, TimeUnit.HOURS);
+        TemperatureUnit temp = TemperatureUnit.CELSIUS;
     }
 
     public static void addUnit(String symbol, Unit unit) {

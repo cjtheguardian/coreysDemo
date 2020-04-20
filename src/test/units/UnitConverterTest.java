@@ -18,7 +18,7 @@ public class UnitConverterTest {
 
         // postiive tests
         testVelocityConversion();
-        // testTemperatureConversion();
+        testTemperatureConversion();
 
         // negative tests
         testExceptionWithIncompatibleSimpleUnits();
