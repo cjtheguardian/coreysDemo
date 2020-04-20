@@ -8,7 +8,6 @@ public class FactoredTransformer implements SimpleTransformer{
         this.factor = factor;
     }
 
-
     @Override
     public Double toBaseUnitType(Double input) {
         return input * factor;

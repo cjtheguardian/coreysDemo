@@ -1,5 +1,6 @@
 package com.cj.converter.unit.store;
 
+import com.cj.converter.unit.TemperatureUnit;
 import com.cj.converter.unit.DistanceUnit;
 import com.cj.converter.unit.TimeUnit;
 import com.cj.converter.unit.Unit;
@@ -18,7 +19,6 @@ public class Units {
         // need to initialize all the unit classes so they populated in this Map
         new VelocityUnit(null, DistanceUnit.METERS, TimeUnit.HOURS);
         new AccelerationUnit(null, DistanceUnit.METERS, TimeUnit.HOURS);
-
     }
 
     public static void addUnit(String symbol, Unit unit) {
