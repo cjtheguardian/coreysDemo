@@ -1,5 +1,6 @@
 package com.cj.converter.unit.store;
 
+import com.cj.converter.unit.TemperatureUnit;
 import com.cj.converter.unit.DistanceUnit;
 import com.cj.converter.unit.TimeUnit;
 import com.cj.converter.unit.Unit;
@@ -17,7 +18,7 @@ public class Units {
 
         new VelocityUnit(null, DistanceUnit.METERS, TimeUnit.HOURS);
         new AccelerationUnit(null, DistanceUnit.METERS, TimeUnit.HOURS);
-
+        TemperatureUnit temp = TemperatureUnit.CELSIUS;
     }
 
     public static void addUnit(String symbol, Unit unit) {

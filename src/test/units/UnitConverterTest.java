@@ -19,6 +19,7 @@ public class UnitConverterTest {
 
         // postiive tests
         testVelocityConversion();
+        testTemperatureConversion();
 
         // negative tests
         testExceptionWithIncompatibleSimpleUnits();
@@ -33,6 +34,13 @@ public class UnitConverterTest {
         System.out.println("Testing velocity conversion....");
         Double mph = UnitConverter.convert(10.0, "m/s", "mph");
         System.out.println("10 meters per second is " + mph+ " mph");
+    }
+
+    private static void testTemperatureConversion() {
+        System.out.println();
+        System.out.println("Testing temperature conversion...");
+        Double degCelsius = UnitConverter.convert(100.0, "degF", "degC");
+        System.out.println("100 degrees Farhienheit is " + degCelsius + " degrees Celsius");
     }
 
     private static void testExceptionWithIncompatibleSimpleUnits() {
