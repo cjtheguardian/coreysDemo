@@ -12,6 +12,7 @@ import java.sql.SQLOutput;
 public class UnitConverterTest {
 
     public static void main(String[] args) {
+        Units.initializeUnitsRepo();
         System.out.println();
         // NOTE. THIS IS NOT HOW YOU WOULD NORMALLY TEST!!!
         // but because we are not using maven, i dont feel like pulling the junit jar manually and adding as a dependency
